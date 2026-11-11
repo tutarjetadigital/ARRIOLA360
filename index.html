@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARRIOLA360 | Mario Arriola - Tarjeta Digital</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #090d16;
+            color: #0f172a;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+            animation: pulse-gold 2s infinite;
+        }
+        @keyframes pulse-gold {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+            }
+        }
+        /* Toast notification styling */
+        .toast-notification {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+        }
+        .toast-notification.show {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+    </style>
+</head>
+<body class="min-h-full py-4 sm:py-8 px-3 flex items-center justify-center selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- CONTENEDOR PRINCIPAL DE LA TARJETA (FONDO BLANCO - PALETA ESTRICTA DE 3 COLORES: 1. Slate/Oscuro, 2. Blanco/Gris, 3. Amarillo/Dorado) -->
+    <div class="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 relative">
+        
+        <!-- Barra Superior -->
+        <div class="bg-slate-900 text-white px-5 py-2.5 flex items-center justify-between border-b border-slate-800">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500 pulse-dot"></span>
+                <span class="text-[11px] font-extrabold tracking-wider uppercase text-amber-400">Asesor Inmobiliario</span>
+            </div>
+            <button onclick="shareCard(event)" class="bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border border-amber-500/40 active:scale-95 cursor-pointer" title="Compartir Tarjeta">
+                <i class="fas fa-share-nodes text-xs text-amber-400"></i>
+                <span class="text-[11px]">Compartir</span>
+            </button>
+        </div>
+
+        <!-- Banner de Cabecera (Imagen Exacta Solicitada) -->
+        <div class="relative w-full h-48 bg-slate-950 overflow-hidden cursor-pointer" onclick="openLightbox('https://i.postimg.cc/VvBhbSPr/Whats-App-Image-2026-11-10-at-3-22-13-PM.jpg')">
+            <img src="https://i.postimg.cc/VvBhbSPr/Whats-App-Image-2026-11-10-at-3-22-13-PM.jpg" 
+                 alt="ARRIOLA360 Banner" 
+                 class="w-full h-full object-cover object-center opacity-95 transition-transform duration-500 hover:scale-105"
+                 onerror="this.src='https://placehold.co/800x400/0f172a/f59e0b?text=ARRIOLA360'">
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+            <div class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-sm text-amber-400 p-1.5 rounded-lg text-xs border border-amber-500/30">
+                <i class="fas fa-expand"></i>
+            </div>
+        </div>
+
+        <!-- Perfil e Identidad ARRIOLA360 -->
+        <div class="px-6 pt-2 pb-6 relative">
+            <div class="flex justify-between items-start mb-3">
+                <div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">ARRIOLA360</h1>
+                    <p class="text-amber-600 font-bold text-sm tracking-wide uppercase mt-0.5">Mario Arriola</p>
+                </div>
+                <div class="bg-amber-500 text-slate-950 px-3 py-1 rounded-xl text-xs font-black tracking-wider uppercase shadow-md">
+                    Guatemala
+                </div>
+            </div>
+
+            <p class="text-slate-600 text-xs font-medium leading-relaxed mb-5 border-l-2 border-amber-500 pl-3">
+                Venta, renta e inversión inmobiliaria con asesoría técnica e integral en todo el país.
+            </p>
+
+            <!-- CALL TO ACTION PRINCIPAL: WHATSAPP (LETRAS NEGRAS - AMARILLO DESTACADO) -->
+            <a href="https://wa.me/50254134111?text=Hola%20Mario,%20me%20interesa%20recibir%20asesor%C3%ADa%20inmobiliaria" 
+               target="_blank" 
+               class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-center py-3.5 px-4 rounded-2xl shadow-lg transition-all duration-200 flex items-center justify-center gap-3 active:scale-[0.98] mb-4">
+                <i class="fab fa-whatsapp text-xl"></i>
+                <span class="text-sm tracking-wide uppercase">Contactar por WhatsApp</span>
+            </a>
+
+            <!-- Caja Informativa de Asesoría (Fondo Azul/Slate Oscuro con Letras Blancas) -->
+            <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-4 text-center mb-5">
+                <div class="flex items-center justify-center gap-2 mb-1 text-amber-400 font-bold text-xs uppercase tracking-wider">
+                    <i class="fas fa-handshake"></i>
+                    <span>Asesoría Personalizada</span>
+                </div>
+                <p class="text-white text-xs font-medium leading-relaxed">
+                    Te acompañamos en cada etapa de tu transacción inmobiliaria de principio a fin.
+                </p>
+            </div>
+
+            <!-- BLOQUE DE CONTACTO LIMPIO Y ORDENADO ARRIOLA360 -->
+            <div class="space-y-2.5 mb-6">
+                <!-- Teléfono ARRIOLA360 -->
+                <a href="tel:50254134111" class="w-full bg-slate-50 border border-slate-200 hover:border-amber-500/50 p-3 rounded-2xl flex items-center gap-3 transition-all active:scale-[0.99] group shadow-sm">
+                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
+                        <i class="fas fa-phone-alt text-xs"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <span class="block text-[10px] text-slate-500 font-semibold uppercase">Llamar Directo</span>
+                        <span class="text-xs font-bold text-slate-900">5413 4111</span>
+                    </div>
+                </a>
+
+                <!-- Correo ARRIOLA360 -->
+                <a href="mailto:arriola360guatemala@gmail.com" class="w-full bg-slate-50 border border-slate-200 hover:border-amber-500/50 p-3 rounded-2xl flex items-center gap-3 transition-all active:scale-[0.99] group shadow-sm">
+                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
+                        <i class="fas fa-envelope text-xs"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <span class="block text-[10px] text-slate-500 font-semibold uppercase">Correo Electrónico</span>
+                        <span class="text-[11px] font-bold text-slate-900 block truncate">arriola360guatemala@gmail.com</span>
+                    </div>
+                </a>
+
+                <!-- Redes Sociales: TikTok -->
+                <a href="https://www.tiktok.com/@arriola360propiedades" target="_blank" class="w-full bg-slate-50 border border-slate-200 hover:border-amber-500/40 p-3 rounded-2xl flex items-center justify-between transition-all group active:scale-[0.99] shadow-sm">
+                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                        <div class="w-9 h-9 rounded-xl bg-slate-900 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
+                            <i class="fab fa-tiktok text-sm"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="block text-[10px] text-slate-500 font-semibold uppercase">Síguenos en TikTok</span>
+                            <span class="text-[11px] font-bold text-slate-900 block truncate">@arriola360propiedades</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all shrink-0 ml-2"></i>
+                </a>
+            </div>
+
+            <!-- GALERÍA ARRIOLA360 -->
+            <div class="space-y-3 mb-8">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-images text-amber-500"></i>
+                        <span>Propiedades y Proyectos</span>
+                    </h3>
+                    <span class="text-[10px] text-slate-500">(Toca para ampliar)</span>
+                </div>
+                
+                <div class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/3NN55NFn/Whats-App-Image-2026-11-10-at-7-58-04-AM-(1).jpg')">
+                    <img src="https://i.postimg.cc/3NN55NFn/Whats-App-Image-2026-11-10-at-7-58-04-AM-(1).jpg" 
+                         alt="ARRIOLA360 Proyecto 1" 
+                         class="w-full max-h-56 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] px-2 py-1 rounded-lg border border-amber-500/30">
+                        <i class="fas fa-search-plus"></i> Ampliar
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/F1tY7MRW/Whats-App-Image-2026-11-10-at-12-53-45-PM.jpg')">
+                        <img src="https://i.postimg.cc/F1tY7MRW/Whats-App-Image-2026-11-10-at-12-53-45-PM.jpg" 
+                             alt="ARRIOLA360 Proyecto 2" 
+                             class="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] p-1 rounded-lg border border-amber-500/30">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/yNdgkXjT/Whats-App-Image-2026-11-10-at-8-02-42-AM-(1).jpg')">
+                        <img src="https://i.postimg.cc/yNdgkXjT/Whats-App-Image-2026-11-10-at-8-02-42-AM-(1).jpg" 
+                             alt="ARRIOLA360 Proyecto 3" 
+                             class="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] p-1 rounded-lg border border-amber-500/30">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: CONSTRUSERVICIOS (MAYÚSCULAS SOSTENIDAS) -->
+            <div class="pt-6 border-t border-slate-200">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider">División Técnica</span>
+                </div>
+                
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">CONSTRUSERVICIOS</h2>
+                <p class="text-xs text-slate-600 font-medium mb-4 leading-relaxed">
+                    Cobertura integral: del diseño y la planificación hasta la entrega de obra.
+                </p>
+
+                <!-- Tarjeta Especial: Diseño de Hospitales -->
+                <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-4 mb-5">
+                    <div class="flex items-center gap-2.5 mb-2">
+                        <div class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-sm font-bold">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white">Diseño de Hospitales</h3>
+                            <p class="text-[10px] text-amber-400 font-semibold uppercase">Especialidad Médica e Infraestructura</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Planificación, arquitectura hospitalaria y normas técnicas especializadas para el desarrollo e implementación de centros de salud y clínicas.
+                    </p>
+                </div>
+
+                <!-- Grid de 4 Áreas Clave -->
+                <div class="grid grid-cols-2 gap-2.5 mb-5">
+                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl flex items-start gap-2.5">
+                        <i class="fas fa-drafting-compass text-amber-500 text-sm mt-0.5"></i>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-900 leading-tight">Diseño y planificación</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl flex items-start gap-2.5">
+                        <i class="fas fa-helmet-safety text-amber-500 text-sm mt-0.5"></i>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-900 leading-tight">Construcción y obra</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl flex items-start gap-2.5">
+                        <i class="fas fa-paint-roller text-amber-500 text-sm mt-0.5"></i>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-900 leading-tight">Acabados e interiores</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl flex items-start gap-2.5">
+                        <i class="fas fa-tools text-amber-500 text-sm mt-0.5"></i>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-900 leading-tight">Instalaciones y equipos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE DE CONTACTO CONSTRUSERVICIOS -->
+                <div class="space-y-2.5 mb-6">
+                    <a href="https://wa.me/50254134111?text=Hola,%20quisiera%20cotizar%20servicios%20de%20CONSTRUSERVICIOS" 
+                       target="_blank" 
+                       class="w-full bg-slate-50 border border-slate-200 hover:border-amber-500/50 p-3 rounded-2xl flex items-center gap-3 transition-all active:scale-[0.99] group shadow-sm">
+                        <div class="w-9 h-9 rounded-xl bg-slate-900 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
+                            <i class="fab fa-whatsapp text-xs"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <span class="block text-[10px] text-slate-500 font-semibold uppercase">WhatsApp CONSTRUSERVICIOS</span>
+                            <span class="text-xs font-bold text-slate-900">5413 4111</span>
+                        </div>
+                    </a>
+
+                    <a href="mailto:construservicios2024@gmail.com" 
+                       class="w-full bg-slate-50 border border-slate-200 hover:border-amber-500/50 p-3 rounded-2xl flex items-center gap-3 transition-all active:scale-[0.99] group shadow-sm">
+                        <div class="w-9 h-9 rounded-xl bg-slate-900 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
+                            <i class="fas fa-envelope text-xs"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="block text-[10px] text-slate-500 font-semibold uppercase">Correo Técnico</span>
+                            <span class="text-[11px] font-bold text-slate-900 block truncate">construservicios2024@gmail.com</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- GALERÍA DE PROYECTOS CONSTRUSERVICIOS -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <h4 class="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-building text-amber-500 text-xs"></i>
+                            <span>Galería de Proyectos</span>
+                        </h4>
+                        <span class="text-[10px] text-slate-500">(Toca para ampliar)</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/TYc8KsR2/Whats-App-Image-2026-11-10-at-3-19-33-PM-(1).jpg')">
+                            <img src="https://i.postimg.cc/TYc8KsR2/Whats-App-Image-2026-11-10-at-3-19-33-PM-(1).jpg" 
+                                 alt="Diseño Hospitalario 1" 
+                                 class="w-full h-32 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] p-1 rounded-md border border-amber-500/30">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/y8fwPSgM/Whats-App-Image-2026-11-10-at-3-19-33-PM.jpg')">
+                            <img src="https://i.postimg.cc/y8fwPSgM/Whats-App-Image-2026-11-10-at-3-19-33-PM.jpg" 
+                                 alt="Diseño Hospitalario 2" 
+                                 class="w-full h-32 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] p-1 rounded-md border border-amber-500/30">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/mgcSvcp7/Whats-App-Image-2026-11-10-at-3-25-28-PM.jpg')">
+                            <img src="https://i.postimg.cc/mgcSvcp7/Whats-App-Image-2026-11-10-at-3-25-28-PM.jpg" 
+                                 alt="Proyecto Obra 1" 
+                                 class="w-full h-32 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] p-1 rounded-md border border-amber-500/30">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer relative group shadow-sm" onclick="openLightbox('https://i.postimg.cc/rFZJZGjJ/Whats-App-Image-2026-11-10-at-3-25-28-PM-(1).jpg')">
+                            <img src="https://i.postimg.cc/rFZJZGjJ/Whats-App-Image-2026-11-10-at-3-25-28-PM-(1).jpg" 
+                                 alt="Proyecto Obra 2" 
+                                 class="w-full h-32 object-cover object-center group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute bottom-2 right-2 bg-slate-900/80 text-amber-400 text-[10px] p-1 rounded-md border border-amber-500/30">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Pie de Página -->
+        <div class="bg-slate-900 text-center py-4 px-5 border-t border-slate-800">
+            <p class="text-[11px] font-bold text-white tracking-wider uppercase">ARRIOLA360 &copy; 2026</p>
+            <p class="text-[10px] text-amber-400 font-medium mt-0.5">Asesoría Inmobiliaria y Servicios de Construcción</p>
+        </div>
+
+    </div>
+
+    <!-- MODAL PARA COMPARTIR ENLACE (FALLBACK VISIBLE Y 100% FUNCIONAL) -->
+    <div id="shareModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all duration-300" onclick="closeShareModal()">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full border border-amber-500/50 shadow-2xl relative text-center" onclick="event.stopPropagation()">
+            <button onclick="closeShareModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-900 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center text-slate-950 text-xl mx-auto mb-3">
+                <i class="fas fa-share-nodes"></i>
+            </div>
+            
+            <h3 class="text-lg font-black text-slate-900">Compartir Tarjeta</h3>
+            <p class="text-xs text-slate-500 mb-4">Copia el enlace a continuación para enviarlo por WhatsApp o redes sociales:</p>
+            
+            <div class="flex items-center gap-2 bg-slate-100 p-2 rounded-xl mb-4 border border-slate-200">
+                <input id="shareInputUrl" type="text" readonly class="bg-transparent text-slate-700 text-xs w-full outline-none font-mono px-1">
+                <button onclick="copyFromModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition-colors shrink-0 flex items-center gap-1">
+                    <i class="fas fa-copy"></i> Copiar
+                </button>
+            </div>
+            
+            <div class="flex justify-center gap-3">
+                <a id="shareWhatsAppBtn" href="#" target="_blank" class="bg-slate-900 text-amber-400 hover:bg-slate-800 text-xs font-bold py-2 px-4 rounded-xl flex items-center gap-2 border border-amber-500/30">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LIGHTBOX PARA AMPLIAR IMÁGENES -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all duration-300" onclick="closeLightbox()">
+        <div class="relative max-w-xl w-full max-h-[85vh] flex items-center justify-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 bg-amber-500 text-slate-950 w-9 h-9 rounded-full font-black text-sm flex items-center justify-center shadow-lg hover:bg-amber-400 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="lightboxImg" src="" alt="Imagen Ampliada" class="max-w-full max-h-[80vh] object-contain rounded-xl border border-amber-500/30 shadow-2xl">
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICACIÓN COMPARTIR / COPIAR -->
+    <div id="toastNotification" class="toast-notification fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl border border-amber-500/50 shadow-2xl flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-xs">
+            <i class="fas fa-check"></i>
+        </div>
+        <div>
+            <p id="toastMessage" class="text-xs font-bold text-white">¡Enlace copiado al portapapeles!</p>
+            <p class="text-[10px] text-amber-400">Listo para compartir</p>
+        </div>
+    </div>
+
+    <script>
+        // Función ultra robusta para compartir la tarjeta
+        function shareCard(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            const currentUrl = window.location.href;
+            const shareTitle = 'ARRIOLA360 | Mario Arriola';
+            const shareText = 'Tarjeta digital de ARRIOLA360 - Asesoría e Inversiones Inmobiliarias en Guatemala.';
+
+            // 1. Intentar API nativa si existe y está en entorno seguro
+            if (navigator.share) {
+                navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: currentUrl
+                }).then(() => {
+                    showToast('¡Tarjeta compartida!');
+                }).catch((err) => {
+                    if (err.name !== 'AbortError') {
+                        fallbackShare(currentUrl);
+                    }
+                });
+            } else {
+                // 2. Fallback con modal y copiado directo
+                fallbackShare(currentUrl);
+            }
+        }
+
+        function fallbackShare(url) {
+            // Intentar copiar directo al portapapeles
+            let copied = false;
+            try {
+                const dummy = document.createElement('textarea');
+                document.body.appendChild(dummy);
+                dummy.value = url;
+                dummy.select();
+                dummy.setSelectionRange(0, 99999);
+                copied = document.execCommand('copy');
+                document.body.removeChild(dummy);
+            } catch (e) {
+                copied = false;
+            }
+
+            if (copied) {
+                showToast('¡Enlace copiado al portapapeles!');
+            } else {
+                // Si falla el copiado automático, abrir modal accesible
+                openShareModal(url);
+            }
+        }
+
+        function openShareModal(url) {
+            const modal = document.getElementById('shareModal');
+            const input = document.getElementById('shareInputUrl');
+            const waBtn = document.getElementById('shareWhatsAppBtn');
+            
+            if (input) input.value = url;
+            if (waBtn) waBtn.href = `https://wa.me/?text=${encodeURIComponent('Tarjeta digital ARRIOLA360: ' + url)}`;
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeShareModal() {
+            const modal = document.getElementById('shareModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function copyFromModal() {
+            const input = document.getElementById('shareInputUrl');
+            if (input) {
+                input.select();
+                input.setSelectionRange(0, 99999);
+                try {
+                    document.execCommand('copy');
+                    showToast('¡Enlace copiado!');
+                } catch (err) {
+                    alert('Por favor copia el enlace manualmente.');
+                }
+            }
+        }
+
+        // Mostrar notificación flotante
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            if (toastMsg) toastMsg.innerText = message;
+            
+            if (toast) {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Lightbox para ampliar imágenes
+        function openLightbox(src) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            if (modal && img) {
+                img.src = src;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Cerrar modal con la tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
