@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Digital - ARRIOLA360 | Mario Arriola</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Única fuente homogénea (Outfit) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* REGLA STRICT: EXACTAMENTE 3 COLORES EN TODA LA TARJETA */
+            --brand-dark: #090d16;    /* COLOR 1: Oscuro (Fondo general, estructuras, botones primarios) */
+            --brand-light: #ffffff;   /* COLOR 2: Claro (Fondo tarjeta, textos sobre oscuro, cajas neutras) */
+            --brand-accent: #f59e0b;  /* COLOR 3: Amarillo/Dorado Cálido (Único color de acento) */
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: var(--brand-dark);
+            background-image: 
+                radial-gradient(rgba(245, 158, 11, 0.15) 1.5px, transparent 1.5px),
+                radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+            color: #090d16;
+        }
+
+        /* Contenedor tipo Tarjeta Profesional Móvil */
+        .card-container {
+            width: 100%;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8fafc;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(245, 158, 11, 0.25);
+        }
+
+        @media (min-width: 480px) {
+            .card-container {
+                max-width: 440px;
+                margin: 2rem auto;
+                min-height: auto;
+                border-radius: 32px;
+                overflow: hidden;
+                border: 1px solid rgba(245, 158, 11, 0.4);
+            }
+        }
+
+        /* Banner estilizado con nueva cabecera */
+        .banner-container {
+            width: 100%;
+            height: 175px;
+            background-color: #090d16;
+            background-image: url('https://i.postimg.cc/VvBhbSPr/Whats-App-Image-2026-11-10-at-3-22-13-PM.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 1.5rem;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(9, 13, 22, 0.45) 0%, rgba(9, 13, 22, 0.85) 100%);
+        }
+
+        /* Sección de contenido */
+        .content-section {
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            position: relative;
+            padding-bottom: 2.5rem;
+            flex-grow: 1;
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
+            margin-top: -24px;
+            z-index: 5;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Contenedor Avatar de perfil */
+        .profile-container {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            margin: -56px auto 0 auto;
+            z-index: 10;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+            background: #090d16;
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(9, 13, 22, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f59e0b;
+        }
+
+        /* Insignia de verificación */
+        .badge-verified {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: #f59e0b;
+            color: #ffffff;
+            width: 28px;
+            height: 28px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Tarjetas de acción */
+        .action-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 0.85rem 1rem;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .action-card:hover {
+            box-shadow: 0 10px 24px -4px rgba(245, 158, 11, 0.2);
+            transform: translateY(-2px);
+            border-color: #f59e0b;
+        }
+        .action-card:active {
+            transform: translateY(0);
+        }
+
+        /* Botones Estilo Uniforme */
+        .btn-brand-primary {
+            background: #090d16;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-brand-primary:hover {
+            background: #1e293b;
+            border-color: #f59e0b;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+        }
+
+        .btn-brand-accent {
+            background: #f59e0b;
+            border: 1px solid #f59e0b;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-brand-accent:hover {
+            background: #d97706;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+        }
+
+        /* Toast Popup */
+        .toast-notification {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Dynamic pulsing dot */
+        .pulse-dot {
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-0 sm:p-4">
+
+    <div class="card-container">
+        
+        <!-- Línea superior de acento dorado -->
+        <div class="h-1.5 w-full bg-amber-500"></div>
+
+        <!-- Barra Superior -->
+        <div class="bg-slate-950 text-slate-100 px-5 py-2.5 flex items-center justify-between border-b border-slate-900">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500 pulse-dot"></span>
+                <span class="text-[11px] font-extrabold tracking-wider uppercase text-amber-400">Asesor Inmobiliario</span>
+            </div>
+            <button onclick="shareCard()" class="bg-slate-900 hover:bg-slate-800 text-slate-100 px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 border border-amber-500/40" title="Compartir Tarjeta">
+                <i class="fas fa-share-nodes text-xs text-amber-400"></i>
+                <span class="text-[11px]">Compartir</span>
+            </button>
+        </div>
+
+        <!-- Banner Superior -->
+        <div class="banner-container">
+            <div class="banner-overlay"></div>
+            <div class="relative z-10 text-center px-4 pt-1 drop-shadow-md">
+                <i class="fas fa-city text-2xl text-amber-400 mb-1"></i>
+                <p class="text-[10px] uppercase font-black tracking-widest text-white">Soluciones Inmobiliarias Integrales</p>
+            </div>
+        </div>
+
+        <!-- Sección Principal de Contenido -->
+        <div class="content-section">
+            <div class="flex flex-col items-center px-5 text-center">
+                
+                <!-- Avatar de Perfil con Logo Oficial de ARRIOLA360 -->
+                <div class="profile-container">
+                    <div class="profile-avatar overflow-hidden">
+                        <img src="https://i.postimg.cc/mkvT5Jph/Whats-App-Image-2026-11-05-at-11-09-53-AM.jpg" 
+                             alt="Logo ARRIOLA360" 
+                             class="w-full h-full object-cover rounded-full"
+                             onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-2xl font-black text-amber-400\'>A360</span>';" />
+                    </div>
+                    <div class="badge-verified" title="Empresa Inmobiliaria Verificada">
+                        <i class="fas fa-check text-[10px]"></i>
+                    </div>
+                </div>
+
+                <!-- Nombre de la Empresa y Titular -->
+                <div class="mt-3 flex flex-col items-center justify-center">
+                    <h1 class="text-3xl font-black text-slate-950 tracking-tight uppercase">ARRIOLA360</h1>
+                    <p class="text-sm font-bold text-amber-500 mt-0.5">Mario Arriola</p>
+                    
+                    <div class="inline-flex items-center gap-1.5 mt-1.5 bg-slate-950 px-3.5 py-1 rounded-full border border-amber-500/40 text-white shadow-sm">
+                        <i class="fas fa-building text-amber-400 text-xs"></i>
+                        <span class="text-xs font-bold tracking-wide text-white uppercase">
+                            Guatemala
+                        </span>
+                    </div>
+
+                    <!-- Etiquetas de Especialidad -->
+                    <div class="mt-3.5 flex flex-wrap justify-center gap-1.5 max-w-xs">
+                        <span class="text-[11px] font-bold text-slate-950 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                            <i class="fas fa-key text-amber-500"></i>Venta
+                        </span>
+                        <span class="text-[11px] font-bold text-slate-950 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                            <i class="fas fa-house-user text-amber-500"></i>Renta
+                        </span>
+                        <span class="text-[11px] font-bold text-slate-950 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                            <i class="fas fa-chart-line text-amber-500"></i>Inversión
+                        </span>
+                    </div>
+                </div>
+
+                <!-- BOTÓN PRINCIPAL WHATSAPP -->
+                <div class="w-full mt-4 text-left">
+                    <a href="https://wa.me/50254134111?text=Hola%20Mario,%20me%20gustar%C3%ADa%20solicitar%20asesor%C3%ADa%20inmobiliaria" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="relative group w-full overflow-hidden rounded-xl bg-amber-500 p-[1.5px] shadow-md hover:shadow-lg transition-all duration-300 block">
+                        
+                        <div class="bg-amber-500 py-2.5 px-3.5 rounded-[10px] flex items-center justify-between text-slate-950 relative z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-slate-950 text-amber-400 shadow-sm flex items-center justify-center flex-shrink-0">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <span class="block text-xs font-black tracking-wide text-slate-950 leading-tight uppercase">
+                                        ¡SOLICITA TU ASESORÍA!
+                                    </span>
+                                    <span class="block text-[10px] text-slate-950 font-bold">
+                                        Atención directa por WhatsApp
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="w-7 h-7 rounded-full bg-slate-950/20 flex items-center justify-center text-slate-950 group-hover:bg-slate-950 group-hover:text-amber-400 transition-all flex-shrink-0">
+                                <i class="fas fa-paper-plane text-[10px]"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Mensaje de Introducción (Caja Azul Oscura con Letras Blancas) -->
+                <div class="mt-3.5 p-3.5 rounded-2xl bg-slate-950 border border-amber-500/40 text-white text-xs font-medium leading-relaxed max-w-xs shadow-md">
+                    <p class="text-white">
+                        Te ayudamos a encontrar la propiedad ideal o a maximizar el retorno de tu inversión inmobiliaria con acompañamiento profesional.
+                    </p>
+                </div>
+
+                <!-- MEDIOS DE CONTACTO Y REDES SOCIALES -->
+                <div class="w-full mt-4 space-y-2 text-left">
+                    <div class="flex items-center justify-between px-1 pb-1 border-b border-slate-200">
+                        <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest">Canales de Contacto</span>
+                        <span class="text-[10px] font-bold text-amber-500">@Arriola360</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-2">
+
+                        <!-- LLAMADA DIRECTA POR TELÉFONO -->
+                        <a href="tel:+50254134111" class="action-card flex items-center gap-3 group shadow-sm">
+                            <div class="w-9 h-9 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
+                                <i class="fas fa-phone-flip text-xs"></i>
+                            </div>
+                            <div class="min-w-0 flex-grow">
+                                <span class="block text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Llamada Telefónica</span>
+                                <span class="block text-xs font-extrabold text-slate-950 tracking-wide">5413 4111</span>
+                            </div>
+                            <div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                <i class="fas fa-chevron-right text-[10px] text-slate-400 group-hover:text-white"></i>
+                            </div>
+                        </a>
+
+                        <!-- TIKTOK -->
+                        <a href="https://www.tiktok.com/@arriola360propiedades?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="action-card flex items-center gap-3 group shadow-sm">
+                            <div class="w-9 h-9 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
+                                <i class="fab fa-tiktok text-xs"></i>
+                            </div>
+                            <div class="min-w-0 flex-grow">
+                                <span class="block text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Perfil TikTok</span>
+                                <span class="block text-xs font-extrabold text-slate-950 truncate">@arriola360propiedades</span>
+                            </div>
+                            <div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                <i class="fas fa-arrow-up-right-from-square text-[9px] text-slate-400 group-hover:text-white"></i>
+                            </div>
+                        </a>
+
+                        <!-- CORREO ELECTRÓNICO -->
+                        <a href="mailto:arriola360guatemala@gmail.com" class="action-card flex items-center gap-3 group shadow-sm">
+                            <div class="w-9 h-9 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
+                                <i class="fas fa-envelope text-xs"></i>
+                            </div>
+                            <div class="min-w-0 flex-grow">
+                                <span class="block text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Correo Electrónico</span>
+                                <span class="block text-xs font-extrabold text-slate-950 truncate" title="arriola360guatemala@gmail.com">arriola360guatemala@gmail.com</span>
+                            </div>
+                            <div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                <i class="fas fa-chevron-right text-[10px] text-slate-400 group-hover:text-white"></i>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- GALERÍA DE 3 IMÁGENES DESTACADAS (ARRIOLA360) -->
+                <div class="w-full mt-4 space-y-2">
+                    <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-200 cursor-pointer group" onclick="openLightbox('https://i.postimg.cc/3NN55NFn/Whats-App-Image-2026-11-10-at-7-58-04-AM-(1).jpg')">
+                        <img src="https://i.postimg.cc/3NN55NFn/Whats-App-Image-2026-11-10-at-7-58-04-AM-(1).jpg" 
+                             alt="Propiedad ARRIOLA360 1" 
+                             class="w-full max-h-56 object-cover rounded-2xl display-block group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-200 cursor-pointer group" onclick="openLightbox('https://i.postimg.cc/F1tY7MRW/Whats-App-Image-2026-11-10-at-12-53-45-PM.jpg')">
+                        <img src="https://i.postimg.cc/F1tY7MRW/Whats-App-Image-2026-11-10-at-12-53-45-PM.jpg" 
+                             alt="Propiedad ARRIOLA360 2" 
+                             class="w-full max-h-56 object-cover rounded-2xl display-block group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-200 cursor-pointer group" onclick="openLightbox('https://i.postimg.cc/yNdgkXjT/Whats-App-Image-2026-11-10-at-8-02-42-AM-(1).jpg')">
+                        <img src="https://i.postimg.cc/yNdgkXjT/Whats-App-Image-2026-11-10-at-8-02-42-AM-(1).jpg" 
+                             alt="Propiedad ARRIOLA360 3" 
+                             class="w-full max-h-56 object-cover rounded-2xl display-block group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE EMPRESA AFILIADA: CONSTRUSERVICIOS -->
+                <div class="w-full mt-5">
+                    <div class="text-center px-1 pb-2 border-b-2 border-amber-500/40">
+                        <span class="inline-block text-xs font-black text-amber-500 bg-slate-950 border border-amber-500/40 px-3.5 py-1 rounded-full uppercase tracking-widest shadow-xs">
+                            <i class="fas fa-handshake mr-1.5 text-amber-400"></i>Servicios Complementarios
+                        </span>
+                    </div>
+
+                    <div class="mt-2.5 p-4 rounded-2xl bg-slate-950 border border-amber-500/40 text-white text-left shadow-lg relative overflow-hidden">
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-slate-900 border border-amber-400/40 flex items-center justify-center text-amber-400 shadow-sm flex-shrink-0">
+                                <i class="fas fa-helmet-safety text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-black text-white tracking-wide uppercase">CONSTRUSERVICIOS</h3>
+                                <p class="text-[10px] text-amber-400 font-bold">Remodelación, Construcción & Mantenimiento</p>
+                            </div>
+                        </div>
+
+                        <!-- Texto Descriptivo de Cobertura Integral -->
+                        <div class="p-2.5 rounded-xl bg-slate-900/80 border border-amber-500/20 mb-2">
+                            <p class="text-[11px] text-white font-semibold leading-relaxed">
+                                Cobertura integral: del diseño y la planificación hasta la entrega de obra.
+                            </p>
+                        </div>
+
+                        <!-- Nueva Sección Destacada: Diseño de Hospitales -->
+                        <div class="p-2.5 rounded-xl bg-slate-900 border border-amber-500/40 mb-3 flex items-start gap-2.5">
+                            <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0 mt-0.5 border border-amber-500/30">
+                                <i class="fas fa-hospital text-xs"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-[11px] font-black text-amber-400 uppercase tracking-wide">Especialistas en Diseño de Hospitales</span>
+                                <p class="text-[10px] text-slate-200 font-medium leading-relaxed mt-0.5">
+                                    Planificación arquitectónica especializada, normativa hospitalaria y ejecución técnica para infraestructura médica y de salud.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Grid de 4 Áreas Principales de Servicios -->
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
+                                <i class="fas fa-pen-ruler text-amber-400 text-xs flex-shrink-0"></i>
+                                <span class="text-[10px] font-bold text-slate-100 leading-tight">Diseño y planificación</span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
+                                <i class="fas fa-trowel-bricks text-amber-400 text-xs flex-shrink-0"></i>
+                                <span class="text-[10px] font-bold text-slate-100 leading-tight">Construcción y obra</span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
+                                <i class="fas fa-paint-roller text-amber-400 text-xs flex-shrink-0"></i>
+                                <span class="text-[10px] font-bold text-slate-100 leading-tight">Acabados e interiores</span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
+                                <i class="fas fa-plug-circle-bolt text-amber-400 text-xs flex-shrink-0"></i>
+                                <span class="text-[10px] font-bold text-slate-100 leading-tight">Instalaciones y equipos</span>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción de CONSTRUSERVICIOS -->
+                        <div class="grid grid-cols-2 gap-2 pt-2.5 border-t border-slate-800 mb-2">
+                            <!-- Botón de WhatsApp CONSTRUSERVICIOS -->
+                            <a href="https://wa.me/50254134111?text=Hola,%20quisiera%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CONSTRUSERVICIOS" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="btn-brand-accent py-2 px-2.5 rounded-xl text-[11px] font-extrabold flex items-center justify-center gap-1.5 shadow-sm text-white">
+                                <i class="fab fa-whatsapp text-xs"></i>
+                                <span>WhatsApp</span>
+                            </a>
+
+                            <!-- Botón de Llamada CONSTRUSERVICIOS -->
+                            <a href="tel:+50254134111" 
+                               class="btn-brand-primary py-2 px-2.5 rounded-xl text-[11px] font-extrabold flex items-center justify-center gap-1.5 shadow-sm">
+                                <i class="fas fa-phone-flip text-[10px] text-amber-400"></i>
+                                <span>5413 4111</span>
+                            </a>
+                        </div>
+
+                        <!-- Correo Electrónico CONSTRUSERVICIOS -->
+<!-- ... existing code -->
